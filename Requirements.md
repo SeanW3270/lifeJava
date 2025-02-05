@@ -1,0 +1,1 @@
+Record type requires Java versions 18 or higher
