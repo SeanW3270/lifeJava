@@ -70,21 +70,29 @@ public class GameOfLife {
      * @param generations        - How many rounds of the game we want to run
      * @param startingGeneration - The starting set of living cells to run through
      *                           the game
+     * @param config             - Included parameter for testing and readout
+     *                           information about runs
      */
-    public void runGenerations(int generations, Set<Cell> startingGeneration) {
+    public void runGenerations(int generations, Set<Cell> startingGeneration, GameConfig config) {
         for (int runs = 1; runs < generations; runs++) {
             long startTime = System.nanoTime(); // Start timer for game run time
             Set<Cell> newGeneration = getNextGeneration(startingGeneration);
             startingGeneration = newGeneration;
 
             // put our working helper functions here..
-            LifeHelpers.printGenerations(startingGeneration);
-            LifeHelpers.printGenerationGrid(startingGeneration);
-            LifeHelpers.printGameRuntime(startTime);
+            if (config.printCells) {
+                LifeHelpers.printGenerations(startingGeneration);
+            }
+            if (config.printGrid) {
+                LifeHelpers.printGenerationGrid(startingGeneration);
+            }
+            if (config.runTime) {
+                LifeHelpers.printGameRuntime(startTime);
+            }
         }
     }
 
     public static void main(String[] args) {
-
+        Cell testCells = {}
     }
 }
