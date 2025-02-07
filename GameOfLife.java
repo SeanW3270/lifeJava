@@ -13,9 +13,9 @@ public class GameOfLife {
 
         long[][] coordinates = {
 
-                { 1, 1 }, { 0, 1 }, { -1, 1 }, // Top row of neighbors
-                { 0, -1 }, { 0, 1 }, // Middle row of neighbors
-                { 1, -1 }, { 0, -1 }, { -1, -1 } // Bottom row of neighbors
+                { -1, 1 }, { 0, 1 }, { 1, 1 }, // Top row of neighbors
+                { -1, 0 }, { 1, 0 }, // Middle row of neighbors
+                { -1, -1 }, { 0, -1 }, { 1, -1 } // Bottom row of neighbors
         };
         for (long[] cor : coordinates) {
 
@@ -74,25 +74,45 @@ public class GameOfLife {
      *                           information about runs
      */
     public void runGenerations(int generations, Set<Cell> startingGeneration, GameConfig config) {
-        for (int runs = 1; runs < generations; runs++) {
-            long startTime = System.nanoTime(); // Start timer for game run time
-            Set<Cell> newGeneration = getNextGeneration(startingGeneration);
-            startingGeneration = newGeneration;
+        LifeHelpers.validateGameInputs(generations, startingGeneration, config);
+        try {
+            for (int runs = 1; runs < generations; runs++) {
+                long startTime = System.nanoTime(); // Start timer for game run time
+                Set<Cell> newGeneration = getNextGeneration(startingGeneration);
+                startingGeneration = newGeneration;
 
-            // put our working helper functions here..
-            if (config.printCells) {
-                LifeHelpers.printGenerations(startingGeneration);
+                // put our working helper functions here..
+                if (config.printCells) {
+                    LifeHelpers.printGenerations(startingGeneration);
+                }
+                if (config.printGrid) {
+                    LifeHelpers.printGenerationGrid(startingGeneration);
+                }
+                if (config.runTime) {
+                    LifeHelpers.printGameRuntime(startTime);
+                }
             }
-            if (config.printGrid) {
-                LifeHelpers.printGenerationGrid(startingGeneration);
-            }
-            if (config.runTime) {
-                LifeHelpers.printGameRuntime(startTime);
-            }
+        } catch (Exception e) {
+            System.err.println("An unexpected error occurred while running the Game of Life: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
     public static void main(String[] args) {
-        Cell testCells = {}
+        Set<Cell> startingCells = new HashSet<>();
+        startingCells.add(new Cell(-1, 1));
+        startingCells.add(new Cell(0, 1));
+        startingCells.add(new Cell(1, 1));
+        startingCells.add(new Cell(1, 0));
+        startingCells.add(new Cell(0, 0));
+        startingCells.add(new Cell(-1, 0));
+        startingCells.add(new Cell(-1, -1));
+        startingCells.add(new Cell(0, -1));
+        startingCells.add(new Cell(1, -1));
+
+        GameConfig runConfig = new GameConfig(true, true, true);
+
+        GameOfLife game = new GameOfLife();
+        game.runGenerations(10, startingCells, runConfig);
     }
 }

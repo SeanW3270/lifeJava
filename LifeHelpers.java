@@ -11,6 +11,7 @@ public class LifeHelpers {
         for (Cell cell : cells) {
             System.out.print("( " + cell.x() + " ," + cell.y() + " )");
         }
+        System.out.println("\n\n");
     }
 
     /**
@@ -24,8 +25,8 @@ public class LifeHelpers {
         if (cells.isEmpty()) {
             throw new IllegalArgumentException("Error: Provided set is empty");
         }
-        long minX = Integer.MAX_VALUE, maxX = Integer.MIN_VALUE;
-        long minY = Integer.MAX_VALUE, maxY = Integer.MIN_VALUE;
+        long minX = Long.MAX_VALUE, maxX = Long.MIN_VALUE;
+        long minY = Long.MAX_VALUE, maxY = Long.MIN_VALUE;
 
         for (Cell cell : cells) {
             minX = Math.min(minX, cell.x());
@@ -44,6 +45,7 @@ public class LifeHelpers {
             }
             System.out.println();
         }
+        System.out.println("\n\n");
     }
 
     /**
@@ -54,6 +56,25 @@ public class LifeHelpers {
     public static void printGameRuntime(long timerStart) {
         long endingTime = System.nanoTime();
         long runDuration = endingTime - timerStart;
-        System.out.println("Execution time: " + runDuration / 1_000_000.0 + " milliseconds");
+        System.out.println("Execution time: " + runDuration / 1_000_000.0 + " milliseconds \n");
+    }
+
+    /**
+     * Helper function to check game inputs before attempting to run generations
+     * 
+     * @param generations        - Game generation integer
+     * @param startingGeneration - Starting set of cells for the game
+     * @param config             - Helper function configs
+     */
+    public static void validateGameInputs(int generations, Set<Cell> startingGeneration, GameConfig config) {
+        if (generations <= 0) {
+            throw new IllegalArgumentException("Error: Number of generations must be greater than zero");
+        }
+        if (startingGeneration == null) {
+            throw new IllegalArgumentException("Error: Starting generation must not be null or empty");
+        }
+        if (config == null) {
+            throw new IllegalArgumentException("Error: Game config must not be null");
+        }
     }
 }

@@ -8,6 +8,9 @@ The purpose of this project will be to demonstrate an implementation of the Game
 
 ## Technical specs
 
+> Java 14 or newer
+>
+
 ## Functional Method Breakdown
 
 ### get_neighbors
@@ -34,16 +37,20 @@ This function will also be used to invoke any helper functions we may create to 
 
 ## Helper Functions
 
-### print_generation
+### printGenerations
 
 A basic funtion that will return a visual print out of the most recently generated cell generation
 
-### print_grid
+### printGenerationGrid
 
 This optional helper function will be used to create a visual representation of the current state of the grid after each generation runs
 
-### generation_run_speed
+### printGameRuntime
 
 This function will be used to optionally return the run speed of each generation
 
 We can use this to get an idea of the run time as we move through generations and potential growth of living cells
+
+### validateGameInputs
+
+Helper function to validate game inputs
