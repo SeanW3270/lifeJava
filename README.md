@@ -8,8 +8,29 @@ The purpose of this project will be to demonstrate an implementation of the Game
 
 ## Technical specs
 
-> Java 14 or newer
->
+- **Java** (JDK 17 or later)
+- **Maven** (Dependency management and testing)
+- **JUnit 5** (Unit testing)
+- **Mockito** (Unit testing)
+
+> Install Java (JDK 17+)
+
+check initial version with
+
+```sh
+java -version
+```
+
+## Testing
+
+For testing run the following commands:
+```sh
+mvn clean install
+```
+
+```sh
+mvn test
+```
 
 ## Functional Method Breakdown
 
