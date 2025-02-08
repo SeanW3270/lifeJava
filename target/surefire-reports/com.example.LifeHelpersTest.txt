@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: com.example.GameOfLifeTest
+Test set: com.example.LifeHelpersTest
 -------------------------------------------------------------------------------
-Tests run: 15, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.107 s -- in com.example.GameOfLifeTest
+Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.023 s -- in com.example.LifeHelpersTest

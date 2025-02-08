@@ -91,6 +91,11 @@ public class LifeHelpers {
      * @return - Returns a set of cells as (x, y) coordinates
      */
     public static Set<Cell> createStartingCellSet(long[][] coordinates) {
+
+        if (coordinates == null || coordinates.length == 0) {
+            throw new IllegalArgumentException("Error: coordinates must include at least one coordinate");
+        }
+
         Set<Cell> startingCellSet = new HashSet<>();
         for (long[] cor : coordinates) {
             if (cor.length == 2) {

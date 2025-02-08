@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.GameOfLifeTest" time="1.155" tests="15" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.example.GameOfLifeTest" time="1.107" tests="15" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="21"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-21.0.6.7-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\Sean\AppData\Local\Temp\surefire6652166728757432644\surefirebooter-20250208114242759_3.jar C:\Users\Sean\AppData\Local\Temp\surefire6652166728757432644 2025-02-08T11-42-42_585-jvmRun1 surefire-20250208114242759_1tmp surefire_0-20250208114242759_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\Sean\AppData\Local\Temp\surefire9613862562173268282\surefirebooter-20250208135747517_3.jar C:\Users\Sean\AppData\Local\Temp\surefire9613862562173268282 2025-02-08T13-57-47_376-jvmRun1 surefire-20250208135747517_1tmp surefire_0-20250208135747517_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="surefire.test.class.path" value="C:\Users\Sean\Documents\GitHub\lifeJava\target\test-classes;C:\Users\Sean\Documents\GitHub\lifeJava\target\classes;C:\Users\Sean\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.9.3\junit-jupiter-api-5.9.3.jar;C:\Users\Sean\.m2\repository\org\opentest4j\opentest4j\1.2.0\opentest4j-1.2.0.jar;C:\Users\Sean\.m2\repository\org\junit\platform\junit-platform-commons\1.9.3\junit-platform-commons-1.9.3.jar;C:\Users\Sean\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\Sean\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.9.3\junit-jupiter-engine-5.9.3.jar;C:\Users\Sean\.m2\repository\org\junit\platform\junit-platform-engine\1.9.3\junit-platform-engine-1.9.3.jar;C:\Users\Sean\.m2\repository\org\mockito\mockito-core\5.6.0\mockito-core-5.6.0.jar;C:\Users\Sean\.m2\repository\net\bytebuddy\byte-buddy\1.14.8\byte-buddy-1.14.8.jar;C:\Users\Sean\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.8\byte-buddy-agent-1.14.8.jar;C:\Users\Sean\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
@@ -30,7 +30,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\Sean\AppData\Local\Temp\surefire6652166728757432644\surefirebooter-20250208114242759_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\Sean\AppData\Local\Temp\surefire9613862562173268282\surefirebooter-20250208135747517_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="21.0.6+7-LTS"/>
@@ -59,7 +59,7 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="65.0"/>
   </properties>
-  <testcase name="testRunGenerations_RunCount" classname="com.example.GameOfLifeTest" time="1.058">
+  <testcase name="testRunGenerations_RunCount" classname="com.example.GameOfLifeTest" time="1.009">
     <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\Sean\.m2\repository\net\bytebuddy\byte-buddy-agent\1.14.8\byte-buddy-agent-1.14.8.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
 WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
@@ -74,8 +74,8 @@ WARNING: Dynamic loading of agents will be disallowed by default in a future rel
   <testcase name="testGetNextGeneration_SingleCell" classname="com.example.GameOfLifeTest" time="0.002"/>
   <testcase name="testGetNextGeneration_Overcrowding" classname="com.example.GameOfLifeTest" time="0.002"/>
   <testcase name="testGetNextGeneration_EmptyGrid" classname="com.example.GameOfLifeTest" time="0.001"/>
-  <testcase name="testGetNeighbors_NoDuplicates" classname="com.example.GameOfLifeTest" time="0.002"/>
-  <testcase name="testRunGenerations_ExceptionHandling" classname="com.example.GameOfLifeTest" time="0.011">
+  <testcase name="testGetNeighbors_NoDuplicates" classname="com.example.GameOfLifeTest" time="0.001"/>
+  <testcase name="testRunGenerations_ExceptionHandling" classname="com.example.GameOfLifeTest" time="0.012">
     <system-err><![CDATA[An unexpected error occurred while running the Game of Life: Test Exception
 java.lang.RuntimeException: Test Exception
 	at com.example.GameOfLife.getNextGeneration(GameOfLife.java:46)
