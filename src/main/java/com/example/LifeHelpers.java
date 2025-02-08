@@ -1,4 +1,4 @@
-package src.main.java.com.example;
+package com.example;
 
 import java.util.HashSet;
 import java.util.Set;

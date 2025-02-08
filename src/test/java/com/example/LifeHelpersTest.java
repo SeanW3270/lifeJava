@@ -1,4 +1,4 @@
-package test.java.com.example;
+package com.example;
 
 public class LifeHelpersTest {
 
