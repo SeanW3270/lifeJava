@@ -1,6 +1,7 @@
 package com.example;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
@@ -13,6 +14,8 @@ import static org.mockito.Mockito.*;
 public class GameOfLifeTest {
 
     @Test
+    @DisplayName("Return the 8 neighbors of a standard cell using getNeighbors")
+
     void testGetNeighbors_HappyPath() {
         GameOfLife game = new GameOfLife();
         Cell cell = new Cell(5, 5);
@@ -33,6 +36,8 @@ public class GameOfLifeTest {
     }
 
     @Test
+    @DisplayName("Min value wrapping and out of bounds test")
+
     void testGetNeighbors_EdgeCase_MinValue() {
         GameOfLife game = new GameOfLife();
         Cell cell = new Cell(Long.MIN_VALUE, Long.MIN_VALUE);
@@ -52,6 +57,8 @@ public class GameOfLifeTest {
     }
 
     @Test
+    @DisplayName("Max value wrapping and out of bounds test")
+
     void testGetNeighbors_EdgeCase_MaxValue() {
         GameOfLife game = new GameOfLife();
         Cell cell = new Cell(Long.MAX_VALUE, Long.MAX_VALUE);
@@ -71,6 +78,8 @@ public class GameOfLifeTest {
     }
 
     @Test
+    @DisplayName("Ensure the number of neighbors returned is 8")
+
     void testGetNeighbors_NoDuplicates() {
         GameOfLife game = new GameOfLife();
         Cell cell = new Cell(10, 10);

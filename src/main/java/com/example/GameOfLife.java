@@ -25,6 +25,7 @@ public class GameOfLife {
             long newX = cell.x() + cor[0];
             long newY = cell.y() + cor[1];
 
+            // Prevent overflow if newX would try to wrap
             if (!((cor[0] > 0 && newX < cell.x()) || (cor[0] < 0 && newX > cell.x())) &&
                     !((cor[1] > 0 && newY < cell.y()) || (cor[1] < 0 && newY > cell.y()))) {
                 potentialCells.add(new Cell(newX, newY));
