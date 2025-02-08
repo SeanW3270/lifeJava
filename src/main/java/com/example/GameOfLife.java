@@ -22,9 +22,12 @@ public class GameOfLife {
         for (long[] cor : coordinates) {
 
             // Add each value to potential cells as long as they are within acceptable range
-            if (cell.x() + cor[0] >= Long.MIN_VALUE && cell.x() + cor[0] <= Long.MAX_VALUE &&
-                    cell.y() + cor[1] >= Long.MIN_VALUE && cell.y() + cor[1] <= Long.MAX_VALUE) {
-                potentialCells.add(new Cell(cell.x() + cor[0], cell.y() + cor[1]));
+            long newX = cell.x() + cor[0];
+            long newY = cell.y() + cor[1];
+
+            if (!((cor[0] > 0 && newX < cell.x()) || (cor[0] < 0 && newX > cell.x())) &&
+                    !((cor[1] > 0 && newY < cell.y()) || (cor[1] < 0 && newY > cell.y()))) {
+                potentialCells.add(new Cell(newX, newY));
             }
         }
 

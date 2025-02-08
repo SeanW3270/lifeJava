@@ -1,38 +1,30 @@
 package com.example;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.beans.Transient;
-import java.util.HashSet;
-import java.util.Set;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 public class CellTest {
 
     @Test
     void testCellConstructor() {
         // Arange
-        Cell cell = new Cell(1, 2);
+        Cell cell = new Cell(1L, 2L);
 
         // Act & Assert
-        assertEquals(1, cell.x());
-        assertEquals(2, cell.y());
+        assertEquals(1L, cell.x());
+        assertEquals(2L, cell.y());
     }
 
     @Test
-    void testCellConstructorInvalidInputs() {
+    void testCellConstructorExtremeValues() {
 
-        assertThrows(NumberFormatException.class, () -> {
-            new Cell(Integer.parseInt("abc"), 100);
-        });
+        Cell minCell = new Cell(Long.MIN_VALUE, Long.MIN_VALUE);
+        Cell maxCell = new Cell(Long.MAX_VALUE, Long.MAX_VALUE);
 
-        assertThrows(NumberFormatException.class, () -> {
-            new Cell(Integer.parseInt("100"), Integer.parseInt("xyz"));
-        });
+        assertEquals(Long.MIN_VALUE, minCell.x());
+        assertEquals(Long.MIN_VALUE, minCell.y());
 
+        assertEquals(Long.MAX_VALUE, maxCell.x());
+        assertEquals(Long.MAX_VALUE, maxCell.y());
     }
 }
