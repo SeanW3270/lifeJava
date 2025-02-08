@@ -1,3 +1,5 @@
+package src.main.java.com.example;
+
 public class GameConfig {
     boolean printCells;
     boolean printGrid;

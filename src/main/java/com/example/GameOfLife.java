@@ -1,3 +1,5 @@
+package src.main.java.com.example;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -99,16 +101,13 @@ public class GameOfLife {
     }
 
     public static void main(String[] args) {
-        Set<Cell> startingCells = new HashSet<>();
-        startingCells.add(new Cell(-1, 1));
-        startingCells.add(new Cell(0, 1));
-        startingCells.add(new Cell(1, 1));
-        startingCells.add(new Cell(1, 0));
-        startingCells.add(new Cell(0, 0));
-        startingCells.add(new Cell(-1, 0));
-        startingCells.add(new Cell(-1, -1));
-        startingCells.add(new Cell(0, -1));
-        startingCells.add(new Cell(1, -1));
+        long[][] coordinates = {
+                { -1, 1 }, { 0, 1 }, { 1, 1 },
+                { -1, 0 }, { 0, 0 }, { 1, 0 },
+                { -1, -1 }, { 0, -1 }, { 1, -1 }
+        };
+
+        Set<Cell> startingCells = LifeHelpers.createStartingCellSet(coordinates);
 
         GameConfig runConfig = new GameConfig(true, true, true);
 

@@ -1,3 +1,6 @@
+package src.main.java.com.example;
+
+import java.util.HashSet;
 import java.util.Set;
 
 public class LifeHelpers {
@@ -76,5 +79,24 @@ public class LifeHelpers {
         if (config == null) {
             throw new IllegalArgumentException("Error: Game config must not be null");
         }
+    }
+
+    /**
+     * Helper function that creates a set of sells for the game of life from a two
+     * dimensional array of coordinates
+     * If the supplied array does not meet the requirements of (x, y) coordinates
+     * this funtion will return a blank set of cells
+     * 
+     * @param coordinates - A two dimensional array of (x, y) coordinates
+     * @return - Returns a set of cells as (x, y) coordinates
+     */
+    public static Set<Cell> createStartingCellSet(long[][] coordinates) {
+        Set<Cell> startingCellSet = new HashSet<>();
+        for (long[] cor : coordinates) {
+            if (cor.length == 2) {
+                startingCellSet.add(new Cell(cor[0], cor[1]));
+            }
+        }
+        return startingCellSet;
     }
 }
