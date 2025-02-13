@@ -1,7 +1,10 @@
 package com.example;
 
+import java.io.FileNotFoundException;
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Scanner;
 
 public class GameOfLife {
     /**
@@ -104,18 +107,83 @@ public class GameOfLife {
         }
     }
 
+    public static Set<Cell> getCellsFromFile(String filePath) throws FileNotFoundException {
+        Set<Cell> startingCells = new HashSet<>();
+        Scanner scanner = new Scanner(new File(filePath));
+
+        if (!scanner.hasNextLine() || !scanner.nextLine().trim().equals("#Life 1.06")) {
+            scanner.close();
+            throw new IllegalArgumentException("Invalid file format. Expected '#Life 1.06' as first line.");
+        }
+
+        while (scanner.hasNextLine()) {
+            String line = scanner.nextLine().trim();
+            if (line.isEmpty() || line.startsWith("#")) {
+                continue;
+            }
+            String[] parts = line.split("\\s+");
+            if (parts.length == 2) {
+                try {
+                    long x = Long.parseLong(parts[0]);
+                    long y = Long.parseLong(parts[1]);
+                    startingCells.add(new Cell(x, y));
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid coordinates: " + line);
+                }
+            } else {
+                System.err.println("Ignoring invalid line: " + line);
+            }
+        }
+        scanner.close();
+        return startingCells;
+    }
+
+    public static boolean getUserConfigInput(Scanner scanner) {
+        String response;
+        while (true) {
+            response = scanner.nextLine().trim().toLowerCase();
+            if (response.equals("y")) {
+                return true;
+            } else if (response.equals("n")) {
+                return false;
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        long[][] coordinates = {
-                { -1, 1 }, { 0, 1 }, { 1, 1 },
-                { -1, 0 }, { 0, 0 }, { 1, 0 },
-                { -1, -1 }, { 0, -1 }, { 1, -1 }
-        };
 
-        Set<Cell> startingCells = LifeHelpers.createStartingCellSet(coordinates);
+        if (args.length < 1) {
+            System.err.println("Usage: java GameOfLife <filepath>");
+            return;
+        }
+        try {
+            Set<Cell> startingCells = getCellsFromFile(args[0]);
 
-        GameConfig runConfig = new GameConfig(true, true, true);
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter number of generations to run: ");
+            int generations = scanner.nextInt();
 
-        GameOfLife game = new GameOfLife();
-        game.runGenerations(10, startingCells, runConfig);
+            // Prompt the user for the configuration options (yes/no)
+            System.out.print("Would you like to print the living cells after each generation? (y/n): ");
+            boolean printCells = getUserConfigInput(scanner);
+
+            System.out.print("Would you like to print the grid after each generation? (y/n): ");
+            boolean printGrid = getUserConfigInput(scanner);
+
+            System.out.print("Would you like to track and print the runtime of each generation? (y/n): ");
+            boolean runTime = getUserConfigInput(scanner);
+
+            // Create the GameConfig object with user-defined settings
+            GameConfig config = new GameConfig(printCells, printGrid, runTime);
+
+            scanner.close();
+
+            GameOfLife game = new GameOfLife();
+            game.runGenerations(generations, startingCells, config);
+        } catch (FileNotFoundException e) {
+            System.err.println("Error: File not found.");
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 }

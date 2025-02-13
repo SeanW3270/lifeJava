@@ -1,0 +1,6 @@
+# Ignore compiled classes
+*.class
+out/
+
+# Ignore target directory
+target/
