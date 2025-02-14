@@ -82,20 +82,21 @@ public class GameOfLife {
      * @param config             - Included parameter for testing and readout
      *                           information about runs
      */
-    public void runGenerations(int generations, Set<Cell> startingGeneration, GameConfig config) {
+    public Set<Cell> runGenerations(int generations, Set<Cell> startingGeneration, GameConfig config) {
         LifeHelpers.validateGameInputs(generations, startingGeneration, config);
+        Set<Cell> resultingGeneration = new HashSet<>(startingGeneration);
         try {
             for (int runs = 1; runs < generations; runs++) {
                 long startTime = System.nanoTime(); // Start timer for game run time
-                Set<Cell> newGeneration = getNextGeneration(startingGeneration);
-                startingGeneration = newGeneration;
+                Set<Cell> newGeneration = getNextGeneration(resultingGeneration);
+                resultingGeneration = newGeneration;
 
                 // put our working helper functions here..
                 if (config.printCells) {
-                    LifeHelpers.printGenerations(startingGeneration);
+                    LifeHelpers.printGenerations(resultingGeneration);
                 }
                 if (config.printGrid) {
-                    LifeHelpers.printGenerationGrid(startingGeneration);
+                    LifeHelpers.printGenerationGrid(resultingGeneration);
                 }
                 if (config.runTime) {
                     LifeHelpers.printGameRuntime(startTime);
@@ -105,49 +106,8 @@ public class GameOfLife {
             System.err.println("An unexpected error occurred while running the Game of Life: " + e.getMessage());
             e.printStackTrace();
         }
-    }
 
-    public static Set<Cell> getCellsFromFile(String filePath) throws FileNotFoundException {
-        Set<Cell> startingCells = new HashSet<>();
-        Scanner scanner = new Scanner(new File(filePath));
-
-        if (!scanner.hasNextLine() || !scanner.nextLine().trim().equals("#Life 1.06")) {
-            scanner.close();
-            throw new IllegalArgumentException("Invalid file format. Expected '#Life 1.06' as first line.");
-        }
-
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine().trim();
-            if (line.isEmpty() || line.startsWith("#")) {
-                continue;
-            }
-            String[] parts = line.split("\\s+");
-            if (parts.length == 2) {
-                try {
-                    long x = Long.parseLong(parts[0]);
-                    long y = Long.parseLong(parts[1]);
-                    startingCells.add(new Cell(x, y));
-                } catch (NumberFormatException e) {
-                    System.err.println("Invalid coordinates: " + line);
-                }
-            } else {
-                System.err.println("Ignoring invalid line: " + line);
-            }
-        }
-        scanner.close();
-        return startingCells;
-    }
-
-    public static boolean getUserConfigInput(Scanner scanner) {
-        String response;
-        while (true) {
-            response = scanner.nextLine().trim().toLowerCase();
-            if (response.equals("y")) {
-                return true;
-            } else if (response.equals("n")) {
-                return false;
-            }
-        }
+        return resultingGeneration;
     }
 
     public static void main(String[] args) {
@@ -157,7 +117,7 @@ public class GameOfLife {
             return;
         }
         try {
-            Set<Cell> startingCells = getCellsFromFile(args[0]);
+            Set<Cell> startingCells = LifeHelpers.getCellsFromFile(args[0]);
 
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter number of generations to run: ");
@@ -165,13 +125,13 @@ public class GameOfLife {
 
             // Prompt the user for the configuration options (y/n)
             System.out.print("Would you like to print the living cells after each generation? (y/n): ");
-            boolean printCells = getUserConfigInput(scanner);
+            boolean printCells = LifeHelpers.getUserConfigInput(scanner);
 
             System.out.print("Would you like to print the grid after each generation? (y/n): ");
-            boolean printGrid = getUserConfigInput(scanner);
+            boolean printGrid = LifeHelpers.getUserConfigInput(scanner);
 
             System.out.print("Would you like to track and print the runtime of each generation? (y/n): ");
-            boolean runTime = getUserConfigInput(scanner);
+            boolean runTime = LifeHelpers.getUserConfigInput(scanner);
 
             // Create the GameConfig object with user-defined settings
             GameConfig config = new GameConfig(printCells, printGrid, runTime);
