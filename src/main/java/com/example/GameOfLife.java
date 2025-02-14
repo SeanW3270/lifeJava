@@ -163,7 +163,7 @@ public class GameOfLife {
             System.out.println("Enter number of generations to run: ");
             int generations = scanner.nextInt();
 
-            // Prompt the user for the configuration options (yes/no)
+            // Prompt the user for the configuration options (y/n)
             System.out.print("Would you like to print the living cells after each generation? (y/n): ");
             boolean printCells = getUserConfigInput(scanner);
 
