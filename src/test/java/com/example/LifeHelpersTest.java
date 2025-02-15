@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -117,6 +118,15 @@ public class LifeHelpersTest {
                 new Cell(0, 0), new Cell(1, 0));
 
         assertEquals(result, expected, "Malformed inputs should be ignored");
+    }
+
+    // ------------ getUserConfigInput --------------
+
+    @Test
+    @DisplayName("Test basic acceptable responses for user configs selections")
+
+    void testGetUserConfigInputs_HappyPathValues() {
+        Scanner scanner = new Scanner(System.in);
     }
 
 }

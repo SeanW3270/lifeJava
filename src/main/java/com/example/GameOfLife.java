@@ -1,7 +1,6 @@
 package com.example;
 
 import java.io.FileNotFoundException;
-import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Scanner;
