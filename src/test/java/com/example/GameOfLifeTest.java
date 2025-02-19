@@ -24,7 +24,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Return the 8 neighbors of a standard cell using getNeighbors")
 
-    void testGetNeighbors_HappyPath() {
+    void getNeighbors_StandardCellInput_CellsReturned() {
         Cell cell = new Cell(5, 5);
 
         Set<Cell> neighbors = game.getNeighbors(cell);
@@ -45,7 +45,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Min value wrapping and out of bounds test")
 
-    void testGetNeighbors_EdgeCase_MinValue() {
+    void getNeighbors_MinOutOfRangeInputs_ReturnsFalse() {
         Cell cell = new Cell(Long.MIN_VALUE, Long.MIN_VALUE);
 
         Set<Cell> neighbors = game.getNeighbors(cell);
@@ -65,7 +65,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Max value wrapping and out of bounds test")
 
-    void testGetNeighbors_EdgeCase_MaxValue() {
+    void getNeighbors_MaxOutOfRangeInputs_ReturnsFalse() {
         Cell cell = new Cell(Long.MAX_VALUE, Long.MAX_VALUE);
 
         Set<Cell> neighbors = game.getNeighbors(cell);
@@ -85,7 +85,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Ensure the number of neighbors returned is 8")
 
-    void testGetNeighbors_NoDuplicates() {
+    void getNeighbors_StandardCellNeighbors_ReturnsTrueForNeighborCount() {
         Cell cell = new Cell(10, 10);
 
         Set<Cell> neighbors = game.getNeighbors(cell);
@@ -99,7 +99,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Single cell should die due to underpopulation")
 
-    void testGetNextGeneration_SingleCell() {
+    void getNextGeneration_SingleCellInput_CellDies() {
         Set<Cell> initialState = Set.of(new Cell(0, 0));
 
         Set<Cell> nextGen = game.getNextGeneration(initialState);
@@ -110,7 +110,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Stable cell structure should remain stable")
 
-    void testGetNextGeneration_StableStructure() {
+    void getNextGeneration_StableCellStructure_RemainsStable() {
         Set<Cell> initialState = Set.of(
                 new Cell(0, 0), new Cell(1, 0),
                 new Cell(0, -1), new Cell(1, -1));
@@ -121,7 +121,8 @@ public class GameOfLifeTest {
 
     @Test
     @DisplayName("Oscillation should occur with a line of three cells in a row")
-    void testGetNextGeneration_Oscilation() {
+
+    void getNextGeneration_OscillationCellStructure_OscillationOccurs() {
         Set<Cell> initialState = Set.of(
                 new Cell(0, 0), new Cell(1, 0), new Cell(2, 0));
         Set<Cell> oscilation = Set.of(
@@ -137,7 +138,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Reproduction should occur when rules are satisfied")
 
-    void testGetNextGeneration_Reproduction() {
+    void getNextGeneration_CellSetToReproduce_CellsReproduce() {
         Set<Cell> initialState = Set.of(
                 new Cell(1, 1), new Cell(2, 1),
                 new Cell(2, 0));
@@ -152,7 +153,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Overcrowding should cause a cell to die")
 
-    void testGetNextGeneration_Overcrowding() {
+    void getNextGeneration_OvercrowdedCells_CellsDie() {
         Set<Cell> initialState = Set.of(
                 new Cell(0, 1),
                 new Cell(-1, 0), new Cell(0, 0), new Cell(1, 0),
@@ -165,7 +166,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("An Empty grid of cells should remain empty")
 
-    void testGetNextGeneration_EmptyGrid() {
+    void getNextGeneration_EmptySetOfCells_CellGridRemainsEmpty() {
         Set<Cell> initialState = Set.of();
 
         Set<Cell> nextGen = game.getNextGeneration(initialState);
@@ -178,7 +179,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("runGenerations should run as many times as it is told through the generations value")
 
-    void testRunGenerations_RunCount() {
+    void runGenerations_StandardNumberOfGenerations_GenerationsRun() {
         Set<Cell> intialState = Set.of(new Cell(0, 0), new Cell(1, 0), new Cell(2, 0));
         GameConfig config = new GameConfig(false, false, false);
 
@@ -192,7 +193,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Verify that validateGameInputs runs one time for a game run")
 
-    void testRunGenerations_ValidateInputs() {
+    void runGenerations_VerifyValidateGameInputs_ValidateGameInputsRuns() {
         Set<Cell> intialState = Set.of(new Cell(0, 0));
         GameConfig config = new GameConfig(false, false, false);
 
@@ -207,7 +208,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Ensure that helper methods are being called based on config settings")
 
-    void testRunGenerations_ValidateConfigHelpers() {
+    void runGenerations_TrueGameConfig_ConfigHelpersAreRun() {
         Set<Cell> initialState = Set.of(new Cell(0, 0), new Cell(1, 0), new Cell(2, 0));
         GameConfig config = new GameConfig(true, true, true);
 
@@ -223,7 +224,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Error handling for generations equal to zero")
 
-    void testRunGenerations_ZeroGenerations() {
+    void runGenerations_GenerationsSetToZero_ThrowsException() {
         Set<Cell> intialState = Set.of(new Cell(0, 0));
         GameConfig config = new GameConfig(false, false, false);
 
@@ -237,7 +238,7 @@ public class GameOfLifeTest {
     @Test
     @DisplayName("Ensure exception handling is working")
 
-    void testRunGenerations_ExceptionHandling() {
+    void runGenerations_ThrowTestException_ThrowsException() {
         Set<Cell> intialState = Set.of(new Cell(0, 0));
         GameConfig config = new GameConfig(false, false, false);
 

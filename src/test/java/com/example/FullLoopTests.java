@@ -12,7 +12,7 @@ class FullLoopTests {
     @Test
     @DisplayName("Full loop test generating test data and verifying output coordinates")
 
-    void gameOfLifeFullLoopTest() throws IOException {
+    void gameOfLifeFullLoopTest_StandardCellInput_GameSucceeds() throws IOException {
 
         // Generate a temp test file with an established pattern
         Path tempFile = Files.createTempFile("test_life", ".txt");

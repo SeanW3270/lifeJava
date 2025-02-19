@@ -32,10 +32,12 @@ public class LifeHelpersTest {
         System.setOut(new PrintStream(consoleOutput));
     }
 
-    @Test
-    @DisplayName("Validate inputs should not through exceptions")
+    // ------------ validateGameInputs --------------
 
-    void testValidateInputs_NoExceptions() {
+    @Test
+    @DisplayName("Validate inputs should not throw exceptions")
+
+    void validateGameInputs_NormalInputs_NoExceptions() {
         assertDoesNotThrow(() -> LifeHelpers.validateGameInputs(5, validStartingGeneration, validStartingConfig),
                 "No exceptions should be throw in valid inputs");
     }
@@ -43,7 +45,7 @@ public class LifeHelpersTest {
     @Test
     @DisplayName("Validate Generations throws error with invalid generations")
 
-    void testValidateInputs_InvalidGenerations() {
+    void validateGameInputs_InvalidGenerations_ThrowsException() {
         assertThrows(IllegalArgumentException.class,
                 () -> LifeHelpers.validateGameInputs(0, validStartingGeneration, validStartingConfig),
                 "Exception is throw when generations is 0");
@@ -56,7 +58,7 @@ public class LifeHelpersTest {
     @Test
     @DisplayName("Validate exception is thrown with null starting generation")
 
-    void testValidateInputs_NullStartingGeneration() {
+    void validateGameInputs_NullGeneration_ThrowsException() {
         assertThrows(IllegalArgumentException.class,
                 () -> LifeHelpers.validateGameInputs(5, null, validStartingConfig),
                 "Exception is thrown when starting generation is null");
@@ -65,7 +67,7 @@ public class LifeHelpersTest {
     @Test
     @DisplayName("Validate exception is thrown with a null game config")
 
-    void testValidateInputs_NullGameConfig() {
+    void validateGameInputs_NullGameConfig_ThrowsException() {
         assertThrows(IllegalArgumentException.class,
                 () -> LifeHelpers.validateGameInputs(5, validStartingGeneration, null),
                 "Exception is thrown when game config is null");
@@ -76,7 +78,7 @@ public class LifeHelpersTest {
     @Test
     @DisplayName("Test valid coordinates creates a set of cells")
 
-    void testCreateStartingCellSet_ValidCoordinates() {
+    void createStartingCells_ValidDataInput_SuccessfullyCreated() {
         long[][] input = { { 0, 0 }, { 0, 1 }, { 1, 0 }, { 1, 1 } };
 
         Set<Cell> created = LifeHelpers.createStartingCellSet(input);
@@ -91,7 +93,7 @@ public class LifeHelpersTest {
     @Test
     @DisplayName("Empty input should return an error")
 
-    void testCreateStartingCellSet_EmptySet() {
+    void createStartingCells_EmptyInput_ThrowsException() {
         long[][] input = {};
 
         assertThrows(IllegalArgumentException.class,
@@ -102,7 +104,7 @@ public class LifeHelpersTest {
     @Test
     @DisplayName("Null imput should return an error")
 
-    void testCreateStartingCellSet_Null() {
+    void createStartingCells_NullInput_ThrowsException() {
         long[][] input = null;
 
         assertThrows(IllegalArgumentException.class,
@@ -113,7 +115,7 @@ public class LifeHelpersTest {
     @Test
     @DisplayName("Malformed coordinates should be ignored")
 
-    void testCreateStartingCellSet_MalformedInput() {
+    void createStartingCells_MalformedInputs_InputsIgnored() {
         long[][] input = { { 0, 0 }, { 1 }, { 1, 0 } };
 
         Set<Cell> result = LifeHelpers.createStartingCellSet(input);
@@ -129,7 +131,7 @@ public class LifeHelpersTest {
     @Test
     @DisplayName("Test to enter 'y' in the config input")
 
-    void getUserConfig_InputYes_True() {
+    void getUserConfigInput_YesInputs_ReturnsTrue() {
         
     ByteArrayInputStream inputStream = new ByteArrayInputStream("y\n".getBytes());
     Scanner scanner = new Scanner(inputStream);
@@ -141,7 +143,7 @@ public class LifeHelpersTest {
     @Test
     @DisplayName("Test to enter 'n' in the config input")
 
-    void getUserConfig_InputNo_False() {
+    void getUserConfigInput_NoInputs_ReturnsFalse() {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("n\n".getBytes());
         Scanner scanner = new Scanner(inputStream);
 
@@ -152,7 +154,7 @@ public class LifeHelpersTest {
     @Test
     @DisplayName("Test entering first and invalid response then a valid response")
 
-    void getUserConfig_InvalidThenValid_() {
+    void getUserConfigInput_InvalidThenValid_ReturnsFalse() {
         ByteArrayInputStream inputStream = new ByteArrayInputStream("invalid\nn\ny\n".getBytes());
         Scanner scanner = new Scanner(inputStream);
 
