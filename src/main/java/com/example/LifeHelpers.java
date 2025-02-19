@@ -150,21 +150,39 @@ public class LifeHelpers {
     }
 
     /**
-     * A simple method that will read in user inputs for each of the game config
-     * values
-     * 
-     * @param scanner - Utilizes an existing scanner to read inputs from command
-     *                line for each value response
-     * @return - Returns boolean values for each config value
-     */
+    * Prompts the user for game configuration settings.
+    *
+    * @param scanner - An existing scanner to read inputs from the command line.
+    * @return - A GameConfig object with user-specified settings.
+    */
+    public static GameConfig getUserGameConfig(Scanner scanner) {
+        System.out.print("Would you like to print the living cells after each generation? (y/n): ");
+        boolean printCells = getUserConfigInput(scanner);
+
+        System.out.print("Would you like to print the grid after each generation? (y/n): ");
+        boolean printGrid = getUserConfigInput(scanner);
+
+        System.out.print("Would you like to track and print the runtime of each generation? (y/n): ");
+        boolean runTime = getUserConfigInput(scanner);
+
+        return new GameConfig(printCells, printGrid, runTime);
+    }
+
+    /**
+ * A helper method to get a valid boolean input from the user.
+ *
+ * @param scanner - The scanner to read user input.
+ * @return - true for 'y', false for 'n'.
+ */
     public static boolean getUserConfigInput(Scanner scanner) {
-        String response;
         while (true) {
-            response = scanner.nextLine().trim().toLowerCase();
+         String response = scanner.nextLine().trim().toLowerCase();
             if (response.equals("y")) {
                 return true;
             } else if (response.equals("n")) {
                 return false;
+            } else {
+                System.out.print("Invalid input. Please enter 'y' or 'n': ");
             }
         }
     }

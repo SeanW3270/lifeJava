@@ -121,20 +121,10 @@ public class GameOfLife {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Enter number of generations to run: ");
             int generations = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
 
-            // Prompt the user for the configuration options (y/n)
-            System.out.print("Would you like to print the living cells after each generation? (y/n): ");
-            boolean printCells = LifeHelpers.getUserConfigInput(scanner);
-
-            System.out.print("Would you like to print the grid after each generation? (y/n): ");
-            boolean printGrid = LifeHelpers.getUserConfigInput(scanner);
-
-            System.out.print("Would you like to track and print the runtime of each generation? (y/n): ");
-            boolean runTime = LifeHelpers.getUserConfigInput(scanner);
-
-            // Create the GameConfig object with user-defined settings
-            GameConfig config = new GameConfig(printCells, printGrid, runTime);
-
+            // Get user configuration
+            GameConfig config = LifeHelpers.getUserGameConfig(scanner);
             scanner.close();
 
             GameOfLife game = new GameOfLife();
