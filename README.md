@@ -1,4 +1,4 @@
-# LifeJava - Conway's Game of Life
+# LifeJava
 
 A Java-based implementation of Conway's Game of Life, demonstrating key principles of cellular automata, algorithmic efficiency, and software design.
 
