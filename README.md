@@ -1,139 +1,132 @@
-# lifeJava
+LifeJava
 
-This project will be a basic Java implementation of the Game of Life using Java.
+A Java-based implementation of Conway's Game of Life, demonstrating key principles of cellular automata, algorithmic efficiency, and software design.
 
-## Purpose
+📌 Project Overview
 
-The purpose of this project will be to demonstrate an implementation of the Game of Life using java code so that we can compare and contrast the advantages and disadvantages of each language for this particular task.
+This project provides an interactive and configurable simulation of the Game of Life, allowing users to specify initial conditions and customize execution parameters.
 
-## Prerequisites
+📋 Prerequisites
 
-- **Java** (JDK 17 or later)
-- **Maven** (Dependency management and testing)
-- **JUnit 5** (Unit testing)
-- **Mockito** (Unit testing)
+Ensure you have the following installed before running the project:
 
-> Install Java (JDK 17+)
+Java (JDK 17 or later)
 
-check initial version with
+Maven (for dependency management and testing)
 
-```sh
+JUnit 5 (for unit testing)
+
+Mockito (for unit test mocking)
+
+Check your Java installation with:
+
 java -version
-```
 
-### Cloning Repository
+📥 Cloning the Repository
 
-To get the code:
-```sh
+Clone the repository using:
+
 git clone <repository-url>
-cd game-of-life
-```
+cd lifeJava
 
-### Building the Project
+🛠️ Building the Project
 
-It is recommended to use Maven
-```sh
+Using Maven (Recommended)
+
 mvn clean compile
-```
 
-Using Java compiler
-```sh
-javac -d target/classes src/main/java/com/examples/*.java
-```
+Using Java Compiler
 
-### Running the Game
+javac -d target/classes src/main/java/com/example/*.java
+
+🚀 Running the Simulation
 
 After compiling, run the game with:
-```sh
-java -cp target/classes com.examples.GameOfLife <path-to-input-file> <number-of-generations>
-```
+
+java -cp target/classes com.example.GameOfLife <path-to-input-file>
+
 Example:
-```sh
-java -cp target/classes com.examples.GameOfLife input.txt 10
-```
-Input files should be formatted in the following way:
-```sh
+
+java -cp target/classes com.example.GameOfLife examples/test_data.txt
+
+📝 Input File Format
+
+Input files should be formatted in Life 1.06 format:
+
 #Life 1.06
 0 1
 1 2
 2 0
 2 1
 2 2
-```
 
-### Configuration options
+Each line represents a living cell with its x and y coordinates.
 
-During execution the game will prompt for the following config values:
+⚙️ Configuration Options
 
-> Print cell coordinates (y/n)
-This will print cell coordinates after each generation
-> Print grid representation (y/n)
-This will print a visual representation of the grid in terminal. (Causion using this option with cell sets that are large or may become large)
-> Show execution time (y/n)
-This option will print the amount of operation time each generation required
+During execution, you will be prompted to configure:
 
-Enter `y` or `n` for each prompt
+Print cell coordinates - Display living cell positions after each generation.
 
-### .gitignore Setup
+Print grid representation - Show a visual representation of the simulation grid.
 
-To prevent compiled files from being committed, ensure your `.gitignore` includes:
-```sh
-target/
-.class
-```
+Show execution time - Display the runtime for each generation.
 
+Enter y (yes) or n (no) when prompted.
 
-## Testing
+🧪 Running Tests
 
-For testing run the following commands:
-```sh
-mvn clean install
-```
+Run tests using Maven:
 
-```sh
 mvn test
-```
 
-## Functional Method Breakdown
+Or build and test:
 
-### get_neighbors
+mvn clean install
 
-This function is designed to return all of the living and dead neighbor positions of a given cell inside of the list of input cells
+🏗️ Functional Breakdown
 
-### get_next_generation
+🔹 getNeighbors(Cell cell)
 
-This function is designed to run a set of living cells and all neighbor positions through the rules of the Game of Life.
+Returns all living and dead neighboring positions of a given cell.
 
-> Living cell with 2 or 3 neighbors lives to the next generation
+🔹 getNextGeneration(Set<Cell> currentGeneration)
 
-> Dead cells with 3 neighbors become alive
+Computes the next state of the grid based on:
 
-> Living cells with more than three neighbors become dead
+A living cell with 2 or 3 neighbors survives.
 
-> Living cells with fewer than 2 neighbors becomes dead
+A dead cell with exactly 3 neighbors becomes alive.
 
-### run_generations
+A living cell with fewer than 2 or more than 3 neighbors dies.
 
-This function will be used to invoke the other functions as we walk through each generation
+🔹 runGenerations(int generations, Set<Cell> startingGeneration, GameConfig config)
 
-This function will also be used to invoke any helper functions we may create to improve readability or our ability to debug
+Iterates through multiple generations.
 
-## Helper Functions
+Calls helper functions for debugging and visualization.
 
-### printGenerations
+🛠️ Helper Functions
 
-A basic funtion that will return a visual print out of the most recently generated cell generation
+✅ printGenerations(Set<Cell> cells)
 
-### printGenerationGrid
+Prints a textual representation of the current generation.
 
-This optional helper function will be used to create a visual representation of the current state of the grid after each generation runs
+✅ printGenerationGrid(Set<Cell> cells)
 
-### printGameRuntime
+Displays a structured grid of the current generation.
 
-This function will be used to optionally return the run speed of each generation
+✅ printGameRuntime(long startTime)
 
-We can use this to get an idea of the run time as we move through generations and potential growth of living cells
+Calculates and prints execution time per generation.
 
-### validateGameInputs
+✅ validateGameInputs(int generations, Set<Cell> startingGeneration, GameConfig config)
 
-Helper function to validate game inputs
+Ensures that input values are valid before running the simulation.
+
+📂 .gitignore Setup
+
+Ensure compiled files and build artifacts are excluded from Git commits:
+
+target/
+*.class
