@@ -73,6 +73,7 @@ Or build and test:
 ```sh
 mvn clean install
 ```
+Examples for running can be found in `test/resources/examples`
 
 ## Functional Breakdown
 ### getNeighbors(Cell cell)

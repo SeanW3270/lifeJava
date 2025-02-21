@@ -28,10 +28,17 @@ public class GameOfLife {
             long newY = cell.y() + cor[1];
 
             // Prevent overflow if newX would try to wrap
-            if (!((cor[0] > 0 && newX < cell.x()) || (cor[0] < 0 && newX > cell.x())) &&
-                    !((cor[1] > 0 && newY < cell.y()) || (cor[1] < 0 && newY > cell.y()))) {
-                potentialCells.add(new Cell(newX, newY));
+            if (((cor[0] > 0 && newX < cell.x()) || (cor[0] < 0 && newX > cell.x())) ||
+                ((cor[1] > 0 && newY < cell.y()) || (cor[1] < 0 && newY > cell.y()))) {
+                continue;
             }
+
+            // Ensure values are within acceptable range
+            if (newX >= Long.MIN_VALUE && newX <= Long.MAX_VALUE &&
+                newY >= Long.MIN_VALUE && newX <= Long.MAX_VALUE) {
+
+                    potentialCells.add(new Cell(newX, newY));
+                }
         }
 
         return potentialCells;

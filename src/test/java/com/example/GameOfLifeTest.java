@@ -7,8 +7,20 @@ import org.mockito.MockedStatic;
 
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.atLeastOnce;
+import static org.mockito.Mockito.anySet;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.doThrow;
 
 public class GameOfLifeTest {
 
