@@ -22,13 +22,13 @@ class FullLoopTests {
         Path exampleFile = Paths.get("src/test/resources/examples/square.txt");
 
         // Read the input file using existing method
-        Set<Cell> intialGeneration = LifeHelpers.getCellsFromFile(exampleFile.toString());
-        assertNotNull(intialGeneration, "Failed to read from test file.");
+        Set<Cell> initialGeneration = LifeHelpers.getCellsFromFile(exampleFile.toString());
+        assertNotNull(initialGeneration, "Failed to read from test file.");
 
         // Run the game for 10 generations using mock data
         GameOfLife game = new GameOfLife();
         GameConfig config = new GameConfig(false, false, false);
-        Set<Cell> resultingGeneration = game.runGenerations(10, intialGeneration, config);
+        Set<Cell> resultingGeneration = game.runGenerations(10, initialGeneration, config);
 
         // Validate expected results
         assertFalse(resultingGeneration.isEmpty(), "Cells should not be empty after 10 generations.");
